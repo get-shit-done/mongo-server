@@ -2,9 +2,11 @@
   "name": "mongo-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "develop": "nodemon src/index.js",
+    "build": "tsc",
+    "lint": "eslint src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -24,7 +26,14 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "@types/express": "^4.17.7",
+    "@typescript-eslint/eslint-plugin": "^3.6.0",
+    "@typescript-eslint/parser": "^3.6.0",
     "eslint": "^7.4.0",
-    "nodemon": "^2.0.4"
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "nodemon": "^2.0.4",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.6"
   }
 }
