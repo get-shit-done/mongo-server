@@ -8,6 +8,14 @@
     "jsx": "react",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true
-  }
+    "esModuleInterop": true,
+    "baseUrl": "./src" // is this needed?
+  },
+  // are these below needed?
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
