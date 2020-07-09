@@ -1,4 +1,5 @@
-import { Router, Request, Response, NextFunction } from 'express' // eslint-disable-line no-unused-vars
+import { Request, Response, NextFunction } from 'express' // eslint-disable-line no-unused-vars
+import { AppRouter } from '../AppRouter'
 
 interface RequestWithBody extends Request {
   body: { [key: string]: string | undefined }
@@ -14,9 +15,7 @@ function requireAuth(req: Request, res: Response, next: NextFunction): void {
   res.send('Not permitted')
 }
 
-const router = Router()
-
-
+const router = AppRouter.getInstance()
 
 router.post('/login', (req: RequestWithBody, res: Response) => {
   const { username, password } = req.body

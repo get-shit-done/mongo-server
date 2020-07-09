@@ -1,4 +1,4 @@
-import { get, controller } from "./decorators"
+import { get, controller } from "../decorators"
 import { Response, Request } from "express" // eslint-disable-line no-unused-vars
 
 @controller('/auth')
