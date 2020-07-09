@@ -1,6 +1,6 @@
 import 'reflect-metadata'
 import { AppRouter } from '../AppRouter'
-import { Methods, Metadata } from '../enums' // eslint-disable-line no-unused-vars
+import { Methods, MetadataKeys } from '../enums' // eslint-disable-line no-unused-vars
 
 export const controller = (routePrefix: string) => (target: Function) => {
   // as of es6, prototype properties are not enumerable. instead of `for in`
@@ -10,13 +10,14 @@ export const controller = (routePrefix: string) => (target: Function) => {
 
   properties.forEach(property => {
     const routehandler = target.prototype[property]
-    const path = Reflect.getMetadata(Metadata.path, target.prototype, property)
+    const path = Reflect.getMetadata(MetadataKeys.path, target.prototype, property)
 
     // Reflect.getMethodData rerurns any type, so use enum to assign type to method
-    const method: Methods = Reflect.getMetadata(Metadata.method, target.prototype, property)
+    const method: Methods = Reflect.getMetadata(MetadataKeys.method, target.prototype, property)
+    const middlewares = Reflect.getMetadata(MetadataKeys.middleware, target.prototype, property) || []
 
     if (path) {
-      router[method](routePrefix + path, routehandler)
+      router[method](routePrefix + path, ...middlewares, routehandler)
     }
   })
 }
