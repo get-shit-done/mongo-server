@@ -1,9 +1,4 @@
-import {
-  Router,
-  Request,
-  Response,
-  NextFunction,
-} from 'express'
+import { Router, Request, Response, NextFunction } from 'express' // eslint-disable-line no-unused-vars
 
 interface RequestWithBody extends Request {
   body: { [key: string]: string | undefined }
@@ -21,12 +16,12 @@ function requireAuth(req: Request, res: Response, next: NextFunction): void {
 
 const router = Router()
 
-router.get('/login', (req: Request, res: Response) => {
+router.get('/login', (req, res) => {
   res.send(`
     <form method="POST">
       <div>
-        <label>Email</label>
-        <input name="email" />
+        <label>Username</label>
+        <input name="username" />
       </div>
       <div>
         <label>Password</label>
@@ -38,13 +33,13 @@ router.get('/login', (req: Request, res: Response) => {
 })
 
 router.post('/login', (req: RequestWithBody, res: Response) => {
-  const { email, password } = req.body
+  const { username, password } = req.body
 
-  if (email && password && email === 'hi@hi.com' && password === 'password') {
+  if (username === 'vincent' && password === 'password') {
     req.session = { loggedIn: true }
     res.redirect('/')
   } else {
-    res.send('Invalid email or password')
+    res.send('Invalid username or password')
   }
 })
 

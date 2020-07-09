@@ -9,7 +9,7 @@
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "baseUrl": "src" // is this needed?
+    "baseUrl": "./src" // is this needed?
   },
   // are these below needed?
   "include": [
