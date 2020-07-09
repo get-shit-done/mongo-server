@@ -1,4 +1,4 @@
-import { get, controller, use } from "../decorators"
+import { get, controller, use, post, bodyValidator } from "../decorators"
 import { Response, Request, NextFunction } from "express" // eslint-disable-line no-unused-vars
 import { logger } from "../middleware/logger"
 
@@ -20,6 +20,19 @@ class LoginController {
         <button>Submit</button>
       </form>
     `)
+  }
+
+  @post('/login')
+  @bodyValidator('username', 'password')
+  postLogin(req: Request, res: Response) {
+    const { username, password } = req.body
+
+    if (username === 'vincent' && password === 'password') {
+      req.session = { loggedIn: true }
+      res.redirect('/')
+    } else {
+      res.send('Invalid username or password')
+    }
   }
 }
 
