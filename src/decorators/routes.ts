@@ -1,8 +1,13 @@
 import 'reflect-metadata'
+import { RequestHandler } from 'express' // eslint-disable-line no-unused-vars
 import { Methods, MetadataKeys } from '../enums'
 
-const routeFactory = (route: string) => (path: string) => (target: any, key: string) => {
-  console.log(path, target, key)
+interface RouteHandlerDescriptor extends PropertyDescriptor {
+  value?: RequestHandler
+}
+
+// i am setting the type of desc to require a requet handler type if any. this warning is bogus
+const routeFactory = (route: string) => (path: string) => (target: any, key: string, desc: RouteHandlerDescriptor) => {
   Reflect.defineMetadata(MetadataKeys.path, path, target, key)
   Reflect.defineMetadata(MetadataKeys.method, route, target, key)
 }
