@@ -1,10 +1,10 @@
 import 'reflect-metadata'
-import { Methods } from './Methods'
+import { Methods, Metadata } from '../enums'
 
 const routeFactory = (route: string) => (path: string) => (target: any, key: string) => {
   console.log(path, target, key)
-  Reflect.defineMetadata('path', path, target, key)
-  Reflect.defineMetadata('method', route, target, key)
+  Reflect.defineMetadata(Metadata.path, path, target, key)
+  Reflect.defineMetadata(Metadata.method, route, target, key)
 }
 
 export const get = routeFactory(Methods.get)
