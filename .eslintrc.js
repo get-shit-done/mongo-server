@@ -4,11 +4,11 @@ module.exports = {
     node: true,
   },
   extends: [
-    'airbnb-base',
+    'airbnb-typescript/base',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaVersion: 11,
+    project: './tsconfig.json',
     sourceType: 'module',
   },
   plugins: [
