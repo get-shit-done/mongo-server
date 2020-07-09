@@ -7,7 +7,7 @@ const validateUtil = (keys: string[]): RequestHandler => (req: Request, res: Res
   if (!req.body) {
     res.status(422).send('no body')
     return
-  }
+  } 
   const isValid = keys.every(key => req.body[key] !== undefined)
   console.log('is valid? ', keys, req.body, isValid)
   !isValid ? res.status(422).send('invalid input') : next()

@@ -34,6 +34,12 @@ class LoginController {
       res.send('Invalid username or password')
     }
   }
+  
+  @get('/logout')
+  getLogout(req: Request, res: Response) {
+    req.session = { logginIn: false }
+    res.redirect('/')
+  }
 }
 
 // export default LoginController
