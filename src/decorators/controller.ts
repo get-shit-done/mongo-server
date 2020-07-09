@@ -1,18 +1,22 @@
 import 'reflect-metadata'
 import { AppRouter } from '../AppRouter'
+import { Methods } from './Methods' // eslint-disable-line no-unused-vars
 
 export const controller = (routePrefix: string) => (target: Function) => {
   // as of es6, prototype properties are not enumerable. instead of `for in`
   // use `getOwnPropertyNames` to access all properties less constructor
-  const methods = Object.getOwnPropertyNames(target.prototype).slice(1) 
+  const properties = Object.getOwnPropertyNames(target.prototype).slice(1) 
   const router = AppRouter.getInstance()
 
-  methods.forEach(method => {
-    const routehandler = target.prototype[method]
-    const path = Reflect.getMetadata('path', target.prototype, method)
+  properties.forEach(property => {
+    const routehandler = target.prototype[property]
+    const path = Reflect.getMetadata('path', target.prototype, property)
+
+    // Reflect.getMethodData rerurns any type, so use enum to assign type to method
+    const method: Methods = Reflect.getMetadata('method', target.prototype, property)
 
     if (path) {
-      router.get(routePrefix + path, routehandler)
+      router[method](routePrefix + path, routehandler)
     }
   })
 }
